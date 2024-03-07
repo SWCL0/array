@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #lijst {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        h1, #lijst, form, #totaal {
+            border-bottom: 1px solid darkgray;
+            padding-bottom: 5px;
+            padding-top: 5px;
+        }
+        .veld {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Array Elements JavaScript</h1>
+    <p id="lijst"></p>
+    <form id="myForm">
+        <div class="veld">
+            <label for="Auto">Auto:</label>
+            <input type="text" id="Auto">
+        </div>
+        <div class="veld">
+            <label for="Prijs">Prijs:</label>
+            <input type="number" id="Prijs">
+        </div>
+        <button type="submit" class="veld">Toevoegen</button>
+    </form>
+    <div id="totaal"></div>
+    <script>
+        let auto = ["Saab", "Volvo", "BMW"];
+        let kosten = [17000, 22000, 21000];
+
+        document.getElementById("myForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let autoInput = document.getElementById("Auto").value;
+            let prijsInput = parseInt(document.getElementById("Prijs").value);
+            auto.push(autoInput);
+            kosten.push(prijsInput);
+            updateDisplay();
+        });
+
+        function updateDisplay() {
+            let kostenTotaal = 0;
+            let kLen = kosten.length;
+            for (let y = 0; y < kLen; y++) {
+                kostenTotaal += kosten[y];
+                console.log(kostenTotaal);
+            }
+            document.getElementById("totaal").innerHTML = "De totaalprijs van de " + kLen + " auto's is: €" + kostenTotaal;
+        
+            let aLen = auto.length;
+            let text = "<ul";
+            for (let i = 0; i < aLen; i++) {
+                text += "<li> De " + auto[i] + " kost €" + kosten[i] + "</li>";
+            }
+            text += "</ul>";
+            document.getElementById("lijst").innerHTML = text;
+        }
+
+        updateDisplay();
+    </script>
+</body>
+</html>
